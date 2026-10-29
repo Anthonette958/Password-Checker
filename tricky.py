@@ -29,6 +29,22 @@ PREDICTABLE_WORDS = {
     "sunshine", "princess", "shadow", "superman", "batman", "access",
 }
 
+# Optional: path to an extra wordlist whose words are treated as predictable.
+# Set this to a file path (or the PREDICTABLE_WORDLIST env var) to load more words.
+PREDICTABLE_WORDLIST_PATH = None
+
+import os as _os
+_pw_path = PREDICTABLE_WORDLIST_PATH or _os.environ.get("PREDICTABLE_WORDLIST")
+if _pw_path:
+    try:
+        with open(_pw_path, "r", encoding="utf-8", errors="ignore") as _fh:
+            for _line in _fh:
+                _w = _line.strip().lower()
+                if _w and not _w.startswith("#") and len(_w) >= 4:
+                    PREDICTABLE_WORDS.add(_w)
+    except OSError:
+        pass
+
 SUBSTITUTIONS = {
     "a": "a", "@": "a", "4": "a",
     "s": "s", "$": "s", "5": "s",
