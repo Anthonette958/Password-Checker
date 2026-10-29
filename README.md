@@ -19,6 +19,15 @@ chmod +x tricky.py
 ./tricky.py --version
 ```
 
+### Extra predictable wordlist
+
+Set `PREDICTABLE_WORDLIST` or edit `PREDICTABLE_WORDLIST_PATH` in `tricky.py`
+to load additional words (length >= 4) treated as predictable:
+
+```bash
+PREDICTABLE_WORDLIST=/path/to/words.txt ./tricky.py
+```
+
 The password is read securely (not echoed). It is never stored or
 uploaded.
 
